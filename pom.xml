@@ -96,23 +96,15 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${org.slf4j.version}</version>
 		</dependency>
-
 		<dependency>
-			<groupId>com.argo.arirang</groupId>
-			<artifactId>morph</artifactId>
+			<groupId>com.argo</groupId>
+			<artifactId>arirang-morph</artifactId>
 			<version>1.0.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/morph-1.0.0.jar</systemPath>
-			<optional>false</optional>
 		</dependency>
-
 		<dependency>
-			<groupId>arirang.lucene-analyzer-4.6</groupId>
-			<artifactId>arirang.lucene-analyzer-4.6</artifactId>
+			<groupId>com.argo</groupId>
+			<artifactId>arirang-analyzer</artifactId>
 			<version>4.7.2</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/arirang.lucene-analyzer-4.7.2.jar</systemPath>
-			<optional>false</optional>
 		</dependency>
 	</dependencies>
 
