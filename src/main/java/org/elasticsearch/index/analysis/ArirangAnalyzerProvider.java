@@ -13,17 +13,22 @@ import org.elasticsearch.index.settings.IndexSettings;
 
 public class ArirangAnalyzerProvider extends AbstractIndexAnalyzerProvider<KoreanAnalyzer> {
 
-    private final KoreanAnalyzer analyzer;
+	private final KoreanAnalyzer analyzer;
 
-    @Inject
-    public ArirangAnalyzerProvider(Index index, @IndexSettings Settings indexSettings, Environment env, @Assisted String name, @Assisted Settings settings) throws IOException {
-        super(index, indexSettings, name, settings);
+	@Inject
+	public ArirangAnalyzerProvider(Index index, @IndexSettings Settings indexSettings, Environment env, @Assisted String name, @Assisted Settings settings) throws IOException {
+		super(index, indexSettings, name, settings);
 
-        analyzer = new KoreanAnalyzer(Lucene.VERSION.LUCENE_47);
-    }
+		analyzer = new KoreanAnalyzer(Lucene.VERSION.LUCENE_47);
+		analyzer.setHasOrigin(true);
+		analyzer.setOriginCNoun(true);
+		analyzer.setBigrammable(false);
+		analyzer.setQueryMode(true);
+		analyzer.setWordSegment(true);
+	}
 
-    @Override
-    public KoreanAnalyzer get() {
-        return this.analyzer;
-    }
+	@Override
+	public KoreanAnalyzer get() {
+		return this.analyzer;
+	}
 }
