@@ -34,11 +34,41 @@ public class ArirangAnalyzerTest {
 
 		Index index = new Index("test");
 
+		/*
+        curl -XPUT http://localhost:9200/test/ -d '{
+          "settings": {
+            "index": {
+              "analysis": {
+                "tokenizer": {
+                  "my_tokenizer": {
+                    "type": "arirang_tokenizer",
+                    "mode" : "extended"
+                  }
+                },
+                "analyzer": {
+                  "arirang": {
+                    "type": "arirang_analyzer",
+                    "tokenizer": "my_tokenizer",
+                    "filter": [ "trim", "arirang_filter" ]
+                  }
+                }
+              }
+            }
+          }
+        }'
+        */
 		Settings settings = ImmutableSettings.settingsBuilder()
 			.put("path.home", "/tmp")
-			.put("index.analysis.analyzer.arirang.type", "arirang_analyzer")
+			.put("index.analysis.tokenizer.my_tokenizer.type", "arirang_tokenizer")
+            .put("index.analysis.tokenizer.my_tokenizer.mode", "search")
+            .put("index.analysis.analyzer.arirang.type", "arirang_analyzer")
+            .put("index.analysis.analyzer.arirang.tokenizer", "my_tokenizer")
 			.put(IndexMetaData.SETTING_VERSION_CREATED, Version.CURRENT)
 			.build();
+
+		// can pass parameter to custom analyzer
+        String mode = settings.get("index.analysis.tokenizer.my_tokenizer.mode", null);
+        System.out.println("mode : " + mode);
 
 		Injector parentInjector = new ModulesBuilder().add(new SettingsModule(settings),
 														   new EnvironmentModule(new Environment(settings)))
