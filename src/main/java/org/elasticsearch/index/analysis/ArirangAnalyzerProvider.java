@@ -19,7 +19,7 @@ public class ArirangAnalyzerProvider extends AbstractIndexAnalyzerProvider<Korea
 	public ArirangAnalyzerProvider(Index index, @IndexSettings Settings indexSettings, Environment env, @Assisted String name, @Assisted Settings settings) throws IOException {
 		super(index, indexSettings, name, settings);
 
-		analyzer = new KoreanAnalyzer(Lucene.VERSION.LUCENE_47);
+		analyzer = new KoreanAnalyzer(Lucene.VERSION.LUCENE_4_10_4);
 		analyzer.setHasOrigin(true);
 		analyzer.setOriginCNoun(true);
 		analyzer.setBigrammable(false);
